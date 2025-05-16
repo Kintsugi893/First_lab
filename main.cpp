@@ -1,13 +1,8 @@
-#include <iostream
+#include <iostream>
 #include <cstdlib>
-#include <ctime>)
+#include <ctime>
 #include <limits>
 #include <string>
-
-// Функция сдачи: выводит секретное число и завершает раунд
-void сдаться(int secret) {
-    std::cout << "Вы сдались. Загаданное число было: " << secret << std::endl;
-}
 
 int main() {
     std::setlocale(LC_ALL, "RUS");
@@ -66,19 +61,15 @@ int main() {
             // Ввод варианта с проверкой
             do {
                 std::cout << "Осталось попыток: " << attempts << std::endl;
-                std::cout << "Ваш вариант (введите 'сдаться' для сдачи): ";
+                std::cout << "Ваш вариант: ";
                 std::cin >> input;
-
-                if (input == "сдаться") {
-                    сдаться(secretNumber);
-                    guessed = true;
-                    break;
-                }
 
                 try {
                     guess = std::stoi(input);
                 } catch (...) {
-                    std::cout << "Ошибка: Введите число или 'сдаться'.\n";
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Ошибка: Введите число.\n";
                     continue;
                 }
 
@@ -89,8 +80,6 @@ int main() {
 
                 break;
             } while (true);
-
-            if (guessed) break;
 
             if (guess == secretNumber) {
                 std::cout << "Поздравляю! Вы угадали число!\n";
